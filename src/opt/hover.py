@@ -103,7 +103,7 @@ np_dist = {
         }
     ],
   
-    'optimizer'         : tf.train.AdamOptimizer(),
+    'optimizer'         : tf.compat.v1.train.AdamOptimizer(),
 
     'inf_auto_metric'   : 'valid_dice',
     'inf_auto_comparator' : '>',

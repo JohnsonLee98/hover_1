@@ -1,9 +1,9 @@
 
-import tensorflow.compat.v1 as tf
 
 from tensorpack import *
 from tensorpack.models import BatchNorm, BNReLU, Conv2D, MaxPooling, FixedUnPooling
 from tensorpack.tfutils.summary import add_moving_summary, add_param_summary
+import tensorflow.compat.v1 as tf
 
 from .utils import *
 

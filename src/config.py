@@ -74,6 +74,8 @@ class Config(object):
         # self.train_dir = ['../../CoNSeP/Train/%s/'  % data_code_dict[self.model_type]]
         # self.valid_dir = ['../../CoNSeP/Valid/%s/' % data_code_dict[self.model_type]]
         self.train_dir = ['../../CoNSeP/Train/Images']
+        self.valid_dir = ['../../CoNSeP/Valid/Images']
+
         # self.valid_dir = ['../../CoNSeP//Image' % data_code_dict[self.model_type]]
         # number of processes for parallel processing input
         self.nr_procs_train = 8 

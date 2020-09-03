@@ -5,7 +5,7 @@ import random
 
 import cv2
 import numpy as np 
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 from tensorpack import imgaug
 
 from loader.augs import (BinarizeLabel, GaussianBlur, GenInstanceDistance,

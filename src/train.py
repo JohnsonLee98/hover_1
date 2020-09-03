@@ -5,7 +5,7 @@ import os
 import random
 
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 from tensorpack import Inferencer, logger
 from tensorpack.callbacks import (DataParallelInferenceRunner, ModelSaver,
                                   MinSaver, MaxSaver, ScheduledHyperParamSetter)

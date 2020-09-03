@@ -1,9 +1,9 @@
 
+import tensorflow as tf
 
 from tensorpack import *
 from tensorpack.models import BatchNorm, BNReLU, Conv2D, MaxPooling, FixedUnPooling
 from tensorpack.tfutils.summary import add_moving_summary, add_param_summary
-import tensorflow.compat.v1 as tf
 
 from .utils import *
 
@@ -120,14 +120,14 @@ class Model(ModelDesc, Config):
     
     # for node to receive manual info such as learning rate.
     def add_manual_variable(self, name, init_value, summary=True):
-        var = tf.get_variable(name, initializer=init_value, trainable=False)
+        var = tf.compat.v1.get_variable(name, initializer=init_value, trainable=False)
         if summary:
             tf.summary.scalar(name + '-summary', var)
         return
 
     def _get_optimizer(self):
         with tf.variable_scope("", reuse=True):
-            lr = tf.get_variable('learning_rate')
+            lr = tf.compat.v1.get_variable('learning_rate')
         opt = self.optimizer(learning_rate=lr)
         return opt
 

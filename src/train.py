@@ -5,7 +5,7 @@ import os
 import random
 
 import numpy as np
-import tensorflow.compat.v1 as tf
+import tensorflow as tf
 from tensorpack import Inferencer, logger
 from tensorpack.callbacks import (DataParallelInferenceRunner, ModelSaver,
                                   MinSaver, MaxSaver, ScheduledHyperParamSetter)
@@ -140,8 +140,6 @@ class Trainer(Config):
                                             self.train_mask_shape,
                                             view)
             data_files = get_files(self.train_dir, self.data_ext)
-            print('--------------')
-            print(self.train_dir, self.data_ext)
             data_generator = loader.train_generator
             nr_procs = self.nr_procs_train
         else:
@@ -230,7 +228,8 @@ class Trainer(Config):
             for idx, opt in enumerate(phase_opts):
                 random.seed(self.seed)
                 np.random.seed(self.seed)
-                tf.random.set_random_seed(self.seed)
+                tf.random.set_seed(self.seed)
+
                 log_dir = '%s/%02d/' % (self.save_dir, idx)
                 pretrained_path = opt['pretrained_path'] 
                 if pretrained_path == -1:

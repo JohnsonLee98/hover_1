@@ -74,7 +74,7 @@ class Config(object):
         # self.train_dir = ['../../CoNSeP/Train/%s/'  % data_code_dict[self.model_type]]
         # self.valid_dir = ['../../CoNSeP/Valid/%s/' % data_code_dict[self.model_type]]
         self.train_dir = ['../../CoNSeP/Train/Images']
-        self.valid_dir = ['../../CoNSeP/Valid/Images']
+        self.valid_dir = ['../../CoNSeP/Test/Images']
 
         # self.valid_dir = ['../../CoNSeP//Image' % data_code_dict[self.model_type]]
         # number of processes for parallel processing input
@@ -101,7 +101,7 @@ class Config(object):
         # while [Nuclei Pixels][Additional] will be used for extracting instances
 
         self.inf_imgs_ext = '.png'
-        self.inf_data_dir = '../../../data/CoNSeP/test/Images/'
+        self.inf_data_dir = '../../../data/CoNSeP/Test/Images/'
         self.inf_output_dir = 'output/%s/%s/' % (exp_id, model_id)
 
         # for inference during evalutaion mode i.e run by infer.py

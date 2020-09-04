@@ -268,5 +268,5 @@ if __name__ == '__main__':
         trainer.view_dataset(args.view)
     else:
         os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
-        nr_gpus = len(args.gpu.split(','))
+        nr_gpus = 2
         trainer.run()

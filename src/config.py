@@ -101,7 +101,7 @@ class Config(object):
         # while [Nuclei Pixels][Additional] will be used for extracting instances
 
         self.inf_imgs_ext = '.png'
-        self.inf_data_dir = '../../../data/CoNSeP/Test/Images/'
+        self.inf_data_dir = '../../CoNSeP/Test/Images/'
         self.inf_output_dir = 'output/%s/%s/' % (exp_id, model_id)
 
         # for inference during evalutaion mode i.e run by infer.py

@@ -193,8 +193,7 @@ class Trainer(Config):
             callbacks.append(ScheduledHyperParamSetter(param_name, param_info[1]))
         # multi-GPU inference (with mandatory queue prefetch)
         infs = [StatCollector()]
-        callbacks.append(DataParallelInferenceRunner(
-                                valid_datagen, infs, list(range(nr_gpus))))
+        callbacks.append(DataParallelInferenceRunner(valid_datagen, infs, [0]))
         callbacks.append(MaxSaver('valid_dice'))
         
         ######
@@ -268,5 +267,5 @@ if __name__ == '__main__':
         trainer.view_dataset(args.view)
     else:
         os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
-        nr_gpus = 2
+        nr_gpus = 1
         trainer.run()

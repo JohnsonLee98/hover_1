@@ -69,6 +69,7 @@ def train_generator(ds, shape_aug=None, input_aug=None, label_aug=None, batch_si
     ### augment just the output i.e index 1 within each yield of DatasetSerial
     ds = ds if label_aug is None else AugmentImageComponent(ds, label_aug, index=1, copy=True)
     #
+    print(ds)
     ds = BatchDataByShape(ds, batch_size, idx=0)
     ds = PrefetchDataZMQ(ds, nr_procs)
     return ds

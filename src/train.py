@@ -153,6 +153,7 @@ class Trainer(Config):
 
         # set nr_proc=1 for viewing to ensure clean ctrl-z
         nr_procs = 1 if view else nr_procs
+        print(data_files)
         dataset = loader.DatasetSerial(data_files)
         datagen = data_generator(dataset,
                         shape_aug=augmentors[0],

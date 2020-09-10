@@ -117,8 +117,8 @@ class Model(ModelDesc, Config):
     # def _get_inputs(self):
     def inputs(self):
         
-        return [InputDesc(tf.float32, [None] + self.train_input_shape + [3], 'images'),
-                InputDesc(tf.float32, [None] + self.train_mask_shape  + [None], 'truemap-coded')]
+        return [tf.TensorSpec(tf.float32, [None] + self.train_input_shape + [3], 'images'),
+                tf.TensorSpec(tf.float32, [None] + self.train_mask_shape  + [None], 'truemap-coded')]
     
     # for node to receive manual info such as learning rate.
     def add_manual_variable(self, name, init_value, summary=True):

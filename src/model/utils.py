@@ -99,7 +99,7 @@ def categorical_crossentropy(output, target):
     """
     # scale preds so that the class probs of each sample sum to 1
     output /= tf.reduce_sum(output,
-                            reduction_indices=len(output.get_shape()) - 1,
+                            axis=len(output.get_shape()) - 1,
                             keepdims=True)
     # manual computation of crossentropy
     epsilon = tf.convert_to_tensor(10e-8, output.dtype.base_dtype)

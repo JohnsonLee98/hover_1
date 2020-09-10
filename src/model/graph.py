@@ -116,6 +116,7 @@ class Model(ModelDesc, Config):
 
     # def _get_inputs(self):
     def inputs(self):
+        print(self.train_input_shape)
         return [tf.TensorSpec(tf.float32, [None, self.train_input_shape ,3], 'images'),
                 tf.TensorSpec(tf.float32, [None, self.train_mask_shape,None], 'truemap-coded')]
     

@@ -136,11 +136,14 @@ class Model(ModelDesc, Config):
 ####
 class Model_NP_HV(Model):
     # def _build_graph(self, inputs):
-    def _build_graph(self, inputs):
+    # def build_graph(self, inputs):
         
-        images, truemap_coded = inputs
+    #     images, truemap_coded = inputs
+    #     orig_imgs = images
+    def build_graph(self, images,label):
+        
+        truemap_coded = label
         orig_imgs = images
-
         if hasattr(self, 'type_classification') and self.type_classification:
             true_type = truemap_coded[...,1]
             true_type = tf.cast(true_type, tf.int32)

@@ -159,7 +159,7 @@ class Trainer(Config):
                         shape_aug=augmentors[0],
                         input_aug=augmentors[1],
                         label_aug=augmentors[2],
-                        batch_size=batch_size,
+                        batch_size=1,
                         nr_procs=nr_procs)
         
         return datagen      

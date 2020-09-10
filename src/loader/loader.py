@@ -61,7 +61,7 @@ def valid_generator(ds, shape_aug=None, input_aug=None, label_aug=None, batch_si
     return ds
 
 ####
-def train_generator(ds, shape_aug=None, input_aug=None, label_aug=None, batch_size=16, nr_procs=8):
+def train_generator(ds, shape_aug=None, input_aug=None, label_aug=None, batch_size=1, nr_procs=8):
     ### augment both the input and label
     ds = ds if shape_aug is None else AugmentImageComponents(ds, shape_aug, (0, 1), copy=True)
     ### augment just the input i.e index 0 within each yield of DatasetSerial

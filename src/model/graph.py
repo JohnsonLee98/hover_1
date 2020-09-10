@@ -5,7 +5,7 @@ import tensorflow as tf
 from tensorpack import *
 from tensorpack.models import BatchNorm, BNReLU, Conv2D, MaxPooling, FixedUnPooling
 from tensorpack.tfutils.summary import add_moving_summary, add_param_summary
-
+import  numpy as np
 from .utils import *
 
 import sys
@@ -137,14 +137,14 @@ class Model(ModelDesc, Config):
 ####
 class Model_NP_HV(Model):
     # def _build_graph(self, inputs):
-    # def build_graph(self, inputs):
+    def build_graph(self, inputs):
         
-    #     images, truemap_coded = inputs
-    #     orig_imgs = images
-    def build_graph(self, images,label):
-        
-        truemap_coded = label
+        images, truemap_coded = inputs
         orig_imgs = images
+    # def build_graph(self, images,label):
+        
+    #     truemap_coded = label
+    #     orig_imgs = images
         if hasattr(self, 'type_classification') and self.type_classification:
             true_type = truemap_coded[...,1]
             true_type = tf.cast(true_type, tf.int32)

@@ -68,13 +68,13 @@ class Config(object):
             'np_dist'  : '540x540_80x80',
         }
 
-        self.data_ext = '.png' 
+        self.data_ext = 'npy' 
         # list of directories containing validation patches. 
         # For both train and valid directories, a comma separated list of directories can be used
         # self.train_dir = ['../../CoNSeP/Train/%s/'  % data_code_dict[self.model_type]]
         # self.valid_dir = ['../../CoNSeP/Valid/%s/' % data_code_dict[self.model_type]]
-        self.train_dir = ['../../ConSep_train.npy']
-        self.valid_dir = ['../../ConSep_test.npy']
+        self.train_dir = ['../../ConSeP_train.npy']
+        self.valid_dir = ['../../ConSeP_test.npy']
 
         # self.valid_dir = ['../../CoNSeP//Image' % data_code_dict[self.model_type]]
         # number of processes for parallel processing input

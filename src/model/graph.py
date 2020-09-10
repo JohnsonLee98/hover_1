@@ -1,7 +1,7 @@
 
-# import tensorflow as tf
-import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior()
+import tensorflow as tf
+# import tensorflow.compat.v1 as tf
+# tf.disable_v2_behavior()
 from tensorpack import *
 from tensorpack.models import BatchNorm, BNReLU, Conv2D, MaxPooling, FixedUnPooling
 from tensorpack.tfutils.summary import add_moving_summary, add_param_summary
@@ -167,7 +167,7 @@ class Model_NP_HV(Model):
 
         ####
         with argscope(Conv2D, activation=tf.identity, use_bias=False, # K.he initializer
-                      W_init=tf.variance_scaling_initializer(scale=2.0, mode='fan_out')), \
+                      W_init=tf.compat.v1.variance_scaling_initializer(scale=2.0, mode='fan_out')), \
                 argscope([Conv2D, BatchNorm], data_format=self.data_format):
 
             i = tf.transpose(images, [0, 3, 1, 2])
@@ -366,7 +366,7 @@ class Model_NP_DIST(Model):
 
         ####
         with argscope(Conv2D, activation=tf.identity, use_bias=False, # K.he initializer
-                      W_init=tf.variance_scaling_initializer(scale=2.0, mode='fan_out')), \
+                      W_init=tf.compat.v1.variance_scaling_initializer(scale=2.0, mode='fan_out')), \
                 argscope([Conv2D, BatchNorm], data_format=self.data_format):
 
             i = tf.transpose(images, [0, 3, 1, 2])

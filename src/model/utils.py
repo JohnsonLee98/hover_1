@@ -104,7 +104,7 @@ def categorical_crossentropy(output, target):
     # manual computation of crossentropy
     epsilon = tf.convert_to_tensor(10e-8, output.dtype.base_dtype)
     output = tf.clip_by_value(output, epsilon, 1. - epsilon)
-    return - tf.reduce_sum(target * tf.log(output),
+    return - tf.reduce_sum(target * tf.math.log(output),
                             reduction_indices=len(output.get_shape()) - 1)
 ####
 def dice_loss(output, target, loss_type='sorensen', axis=None, smooth=1e-3):

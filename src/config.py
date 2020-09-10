@@ -20,7 +20,7 @@ class Config(object):
         mode = 'hover'
         self.model_type = 'np_hv'
 
-        self.type_classification = True # whether to predict the nuclear type
+        self.type_classification = False # whether to predict the nuclear type
         # ! must use CoNSeP dataset, where nuclear type labels are available
         # denotes number of classes for nuclear type classification, 
         # plus the background class

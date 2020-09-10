@@ -73,8 +73,8 @@ class Config(object):
         # For both train and valid directories, a comma separated list of directories can be used
         # self.train_dir = ['../../CoNSeP/Train/%s/'  % data_code_dict[self.model_type]]
         # self.valid_dir = ['../../CoNSeP/Valid/%s/' % data_code_dict[self.model_type]]
-        self.train_dir = ['../../ConSeP_train.npy']
-        self.valid_dir = ['../../ConSeP_test.npy']
+        self.train_dir = ['../../con/train']
+        self.valid_dir = ['../../con/test']
 
         # self.valid_dir = ['../../CoNSeP//Image' % data_code_dict[self.model_type]]
         # number of processes for parallel processing input

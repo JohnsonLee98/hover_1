@@ -114,7 +114,9 @@ class Model(ModelDesc, Config):
         self.freeze = freeze
         self.data_format = 'NCHW'
 
-    def _get_inputs(self):
+    # def _get_inputs(self):
+    def inputs(self):
+        
         return [InputDesc(tf.float32, [None] + self.train_input_shape + [3], 'images'),
                 InputDesc(tf.float32, [None] + self.train_mask_shape  + [None], 'truemap-coded')]
     
@@ -124,8 +126,8 @@ class Model(ModelDesc, Config):
         if summary:
             tf.summary.scalar(name + '-summary', var)
         return
-
-    def _get_optimizer(self):
+    # def _get_optimizer(self):
+    def optimizer(self):
         with tf.variable_scope("", reuse=True):
             lr = tf.compat.v1.get_variable('learning_rate')
         opt = self.optimizer(learning_rate=lr)
@@ -133,7 +135,8 @@ class Model(ModelDesc, Config):
 
 ####
 class Model_NP_HV(Model):
-    def _build_graph(self, inputs):
+    # def _build_graph(self, inputs):
+    def build_graph(self, inputs):
         
         images, truemap_coded = inputs
         orig_imgs = images

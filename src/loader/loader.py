@@ -35,6 +35,7 @@ class DatasetSerial(RNGDataFlow):
     def get_data(self):
         idx_list = list(range(0, len(self.path_list)))
         random.shuffle(idx_list)
+        print(idx_list)
         for idx in idx_list:
 
             data = np.load(self.path_list[idx])

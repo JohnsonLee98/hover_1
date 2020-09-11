@@ -254,6 +254,8 @@ class Model_NP_HV(Model):
             dh = tf.nn.conv2d(h, mh, strides=[1, 1, 1, 1], padding='SAME')
             dv = tf.nn.conv2d(v, mv, strides=[1, 1, 1, 1], padding='SAME')
             output = tf.concat([dh, dv], axis=-1)
+            print('-----------------------------')
+            print(output)
             return output
         def loss_mse(true, pred, name=None):
             ### regression loss
@@ -347,7 +349,7 @@ class Model_NP_HV(Model):
             viz = tf.expand_dims(viz, axis=0)
             tf.summary.image('output', viz, max_outputs=1)
 
-        return
+        return self.cost
 ####
 
 class Model_NP_DIST(Model):

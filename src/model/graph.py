@@ -139,7 +139,9 @@ class Model_NP_HV(Model):
     # def _build_graph(self, inputs):
     def build_graph(self, *inputs):
         
-        images, truemap_coded = *inputs
+        # images, truemap_coded = inputs
+        images = inputs[0] 
+        truemap_coded = inputs[1]
         orig_imgs = images
     # def build_graph(self, images,label):
         

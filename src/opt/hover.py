@@ -58,7 +58,7 @@ np_hv = {
 
     # 'optimizer'           : tf.compat.v1.train.AdamOptimizer(),
     # 'optimizer'           : tf.train.AdamOptimizer,
-    'optimizer'           : tf.keras.AdamOptimizer(),
+    'optimizer'           : tf.keras.optimizers.Adam(),
     'inf_auto_metric'   : 'valid_dice',
     'inf_auto_comparator' : '>',
     'inf_batch_size' : 16,
@@ -106,7 +106,7 @@ np_dist = {
   
     # 'optimizer'         : tf.compat.v1.train.AdamOptimizer(),
     # 'optimizer'           : tf.train.AdamOptimizer,
-    'optimizer'           : tf.keras.AdamOptimizer(),
+    'optimizer'           : tf.keras.optimizers.Adam(),
 
     'inf_auto_metric'   : 'valid_dice',
     'inf_auto_comparator' : '>',

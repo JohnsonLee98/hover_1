@@ -127,7 +127,7 @@ class Model(ModelDesc, Config):
             tf.summary.scalar(name + '-summary', var)
         return
     # def _get_optimizer(self):
-    def optimizer(self):
+    def get_optimizer(self):
         with tf.compat.v1.variable_scope("", reuse=True):
             lr = tf.compat.v1.get_variable('learning_rate')
         opt = self.optimizer(learning_rate=lr)

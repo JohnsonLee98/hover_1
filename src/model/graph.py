@@ -130,7 +130,7 @@ class Model(ModelDesc, Config):
     def get_optimizer(self):
         with tf.compat.v1.variable_scope("", reuse=True):
             # lr = tf.compat.v1.get_variable('learning_rate')
-            lr = tf.Variable('learning_rate')
+            lr = tf.compat.v1.get_variable('learning_rate')
         opt = self.optimizer(learning_rate=lr)
         return opt
 

@@ -78,8 +78,8 @@ class Config(object):
 
         # self.valid_dir = ['../../CoNSeP//Image' % data_code_dict[self.model_type]]
         # number of processes for parallel processing input
-        self.nr_procs_train = 1
-        self.nr_procs_valid = 1 
+        self.nr_procs_train = 8
+        self.nr_procs_valid = 4 
 
         self.input_norm  = True # normalize RGB to 0-1 range
 

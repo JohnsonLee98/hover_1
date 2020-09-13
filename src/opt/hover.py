@@ -45,7 +45,7 @@ np_hv = {
             # path to load, -1 to auto load checkpoint from previous phase, 
             # None to start from scratch
             'pretrained_path'  : -1,
-            'train_batch_size' : 4, # unfreezing everything will
+            'train_batch_size' : 8, # unfreezing everything will
             'infer_batch_size' : 16,
 
             'model_flags' : {

@@ -115,8 +115,8 @@ class Model(ModelDesc, Config):
         self.freeze = freeze
         self.data_format = 'NCHW'
 
-    # def _get_inputs(self):
-    def inputs(self):
+    def _get_inputs(self):
+    # def inputs(self):
     #     return [tf.TensorSpec( [None, self.train_input_shape[0],self.train_input_shape[1], 3],tf.float32, 'images'),
     #             tf.TensorSpec( [None, self.train_mask_shape[0],self.train_mask_shape[1],None], tf.float32,'truemap-coded')]
     # def _get_inputs(self):
@@ -141,8 +141,8 @@ class Model(ModelDesc, Config):
 
 ####
 class Model_NP_HV(Model):
+    # def _build_graph(self, inputs):
     def _build_graph(self, inputs):
-    # def build_graph(self, *inputs):
         
         images, truemap_coded = inputs
         # images = inputs[0] 

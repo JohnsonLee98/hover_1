@@ -116,10 +116,12 @@ class Model(ModelDesc, Config):
         self.data_format = 'NCHW'
 
     # def _get_inputs(self):
-    def inputs(self):
-        return [tf.TensorSpec( [None, self.train_input_shape[0],self.train_input_shape[1], 3],tf.float32, 'images'),
-                tf.TensorSpec( [None, self.train_mask_shape[0],self.train_mask_shape[1],None], tf.float32,'truemap-coded')]
-    
+    # def inputs(self):
+    #     return [tf.TensorSpec( [None, self.train_input_shape[0],self.train_input_shape[1], 3],tf.float32, 'images'),
+    #             tf.TensorSpec( [None, self.train_mask_shape[0],self.train_mask_shape[1],None], tf.float32,'truemap-coded')]
+    def _get_inputs(self):
+        return [InputDesc(tf.float32, [None] + self.train_input_shape + [3], 'images'),
+                InputDesc(tf.float32, [None] + self.train_mask_shape  + [None], 'truemap-coded')]    
     # for node to receive manual info such as learning rate.
     def add_manual_variable(self, name, init_value, summary=True):
         # var = tf.compat.v1.get_variable(name, initializer=init_value, trainable=False)
@@ -139,12 +141,12 @@ class Model(ModelDesc, Config):
 
 ####
 class Model_NP_HV(Model):
-    # def _build_graph(self, inputs):
-    def build_graph(self, *inputs):
+    def _build_graph(self, inputs):
+    # def build_graph(self, *inputs):
         
-        # images, truemap_coded = inputs
-        images = inputs[0] 
-        truemap_coded = inputs[1]
+        images, truemap_coded = inputs
+        # images = inputs[0] 
+        # truemap_coded = inputs[1]
         orig_imgs = images
     # def build_graph(self, images,label):
         

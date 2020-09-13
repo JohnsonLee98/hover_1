@@ -26,9 +26,9 @@ def upsample2x(name, x):
 ####
 def res_blk(name, l, ch, ksize, count, split=1, strides=1, freeze=False):
     ch_in = l.get_shape().as_list()
-    with tf.compat.v1.variable_scope(name):
+    with tf.variable_scope(name):
         for i in range(0, count):
-            with tf.compat.v1.variable_scope('block' + str(i)):  
+            with tf.variable_scope('block' + str(i)):  
                 x = l if i == 0 else BNReLU('preact', l)
                 x = Conv2D('conv1', x, ch[0], ksize[0], activation=BNReLU)
                 x = Conv2D('conv2', x, ch[1], ksize[1], split=split, 
@@ -43,9 +43,9 @@ def res_blk(name, l, ch, ksize, count, split=1, strides=1, freeze=False):
     return l
 ####
 def dense_blk(name, l, ch, ksize, count, split=1, padding='valid'):
-    with tf.compat.v1.variable_scope(name):
+    with tf.variable_scope(name):
         for i in range(0, count):
-            with tf.compat.v1.variable_scope('blk/' + str(i)):
+            with tf.variable_scope('blk/' + str(i)):
                 x = BNReLU('preact_bna', l)
                 x = Conv2D('conv1', x, ch[0], ksize[0], padding=padding, activation=BNReLU)
                 x = Conv2D('conv2', x, ch[1], ksize[1], padding=padding, split=split)
@@ -82,8 +82,8 @@ def encoder(i, freeze):
 ####
 def decoder(name, i):
     pad = 'valid' # to prevent boundary artifacts
-    with tf.compat.v1.variable_scope(name):
-        with tf.compat.v1.variable_scope('u3'):
+    with tf.variable_scope(name):
+        with tf.variable_scope('u3'):
             u3 = upsample2x('rz', i[-1])
             u3_sum = tf.add_n([u3, i[-2]])
 
@@ -91,7 +91,7 @@ def decoder(name, i):
             u3 = dense_blk('dense', u3, [128, 32], [1, 5], 8, split=4, padding=pad)
             u3 = Conv2D('convf', u3, 512, 1, strides=1)   
         ####
-        with tf.compat.v1.variable_scope('u2'):          
+        with tf.variable_scope('u2'):          
             u2 = upsample2x('rz', u3)
             u2_sum = tf.add_n([u2, i[-3]])
 
@@ -99,7 +99,7 @@ def decoder(name, i):
             u2 = dense_blk('dense', u2x, [128, 32], [1, 5], 4, split=4, padding=pad)
             u2 = Conv2D('convf', u2, 256, 1, strides=1)   
         ####
-        with tf.compat.v1.variable_scope('u1'):          
+        with tf.variable_scope('u1'):          
             u1 = upsample2x('rz', u2)
             u1_sum = tf.add_n([u1, i[-4]])
 
@@ -122,17 +122,18 @@ class Model(ModelDesc, Config):
     
     # for node to receive manual info such as learning rate.
     def add_manual_variable(self, name, init_value, summary=True):
-        var = tf.compat.v1.get_variable(name, initializer=init_value, trainable=False)
+        # var = tf.compat.v1.get_variable(name, initializer=init_value, trainable=False)
+        var = tf.get_variable(name, initializer=init_value, trainable=False)
         if summary:
             tf.summary.scalar(name + '-summary', var)
         return
     # def _get_optimizer(self):
     def get_optimizer(self):
-        # with tf.compat.v1.variable_scope(tf.compat.v1.get_variable_scope(),reuse=tf.compat.v1.AUTO_REUSE):
-        # # with tf.compat.v1.variable_scope(tf.compat.v1.get_variable_scope()):
-        #     # lr = tf.compat.v1.get_variable('learning_rate')
-        #     lr = tf.compat.v1.get_variable('learning_rate')
-        lr = 1.0e-4
+        with tf.variable_scope('',reuse=True):
+        # with tf.compat.v1.variable_scope(tf.compat.v1.get_variable_scope()):
+            # lr = tf.compat.v1.get_variable('learning_rate')
+            lr = tf.get_variable('learning_rate')
+        # lr = 1.0e-4
         opt = self.optimizer(learning_rate=lr)
         return opt
 
@@ -171,7 +172,7 @@ class Model_NP_HV(Model):
 
         ####
         with argscope(Conv2D, activation=tf.identity, use_bias=False, # K.he initializer
-                      W_init=tf.compat.v1.variance_scaling_initializer(scale=2.0, mode='fan_out')), \
+                      W_init=tf.variance_scaling_initializer(scale=2.0, mode='fan_out')), \
                 argscope([Conv2D, BatchNorm], data_format=self.data_format):
 
             i = tf.transpose(images, [0, 3, 1, 2])
@@ -370,7 +371,7 @@ class Model_NP_DIST(Model):
 
         ####
         with argscope(Conv2D, activation=tf.identity, use_bias=False, # K.he initializer
-                      W_init=tf.compat.v1.variance_scaling_initializer(scale=2.0, mode='fan_out')), \
+                      W_init=tf.variance_scaling_initializer(scale=2.0, mode='fan_out')), \
                 argscope([Conv2D, BatchNorm], data_format=self.data_format):
 
             i = tf.transpose(images, [0, 3, 1, 2])

@@ -84,7 +84,7 @@ class Config(object):
         self.input_norm  = True # normalize RGB to 0-1 range
 
         ####
-        exp_id = 'v1.0/'
+        exp_id = 'v1.1/'
         model_id = '%s' % self.model_type
         self.model_name = '%s/%s' % (exp_id, model_id)
         # loading chkpts in tensorflow, the path must not contain extra '/'

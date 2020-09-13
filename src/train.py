@@ -228,8 +228,10 @@ class Trainer(Config):
         if len(phase_opts) > 1:
             for idx, opt in enumerate(phase_opts):
                 random.seed(self.seed)
+                # np.random.seed(self.seed)
+                # tf.random.set_seed(self.seed)
                 np.random.seed(self.seed)
-                tf.random.set_seed(self.seed)
+                tf.random.set_random_seed(self.seed)
 
                 log_dir = '%s/%02d/' % (self.save_dir, idx)
                 pretrained_path = opt['pretrained_path'] 

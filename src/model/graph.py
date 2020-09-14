@@ -1,12 +1,11 @@
-# -*- coding: utf-8 -*-
-
 
 import tensorflow as tf
-
+# import tensorflow.compat.v1 as tf
+# tf.disable_v2_behavior()
 from tensorpack import *
 from tensorpack.models import BatchNorm, BNReLU, Conv2D, MaxPooling, FixedUnPooling
 from tensorpack.tfutils.summary import add_moving_summary, add_param_summary
-
+import  numpy as np
 from .utils import *
 
 import sys
@@ -116,30 +115,43 @@ class Model(ModelDesc, Config):
         self.freeze = freeze
         self.data_format = 'NCHW'
 
-    def _get_inputs(self):
+    # def _get_inputs(self):
+    def inputs(self):
+    #     return [tf.TensorSpec( [None, self.train_input_shape[0],self.train_input_shape[1], 3],tf.float32, 'images'),
+    #             tf.TensorSpec( [None, self.train_mask_shape[0],self.train_mask_shape[1],None], tf.float32,'truemap-coded')]
+    # def _get_inputs(self):
         return [InputDesc(tf.float32, [None] + self.train_input_shape + [3], 'images'),
-                InputDesc(tf.float32, [None] + self.train_mask_shape  + [None], 'truemap-coded')]
-    
+                InputDesc(tf.float32, [None] + self.train_mask_shape  + [None], 'truemap-coded')]    
     # for node to receive manual info such as learning rate.
     def add_manual_variable(self, name, init_value, summary=True):
+        # var = tf.compat.v1.get_variable(name, initializer=init_value, trainable=False)
         var = tf.get_variable(name, initializer=init_value, trainable=False)
         if summary:
             tf.summary.scalar(name + '-summary', var)
         return
-
-    def _get_optimizer(self):
-        with tf.variable_scope("", reuse=True):
+    # def _get_optimizer(self):
+    def get_optimizer(self):
+        with tf.variable_scope('',reuse=True):
+        # with tf.compat.v1.variable_scope(tf.compat.v1.get_variable_scope()):
+            # lr = tf.compat.v1.get_variable('learning_rate')
             lr = tf.get_variable('learning_rate')
+        # lr = 1.0e-4
         opt = self.optimizer(learning_rate=lr)
         return opt
 
 ####
 class Model_NP_HV(Model):
-    def _build_graph(self, inputs):
+    # def _build_graph(self, inputs):
+    def build_graph(self, *inputs):
         
-        images, truemap_coded = inputs
+        # images, truemap_coded = inputs
+        images = inputs[0] 
+        truemap_coded = inputs[1]
         orig_imgs = images
-
+    # def build_graph(self, images,label):
+        
+    #     truemap_coded = label
+    #     orig_imgs = images
         if hasattr(self, 'type_classification') and self.type_classification:
             true_type = truemap_coded[...,1]
             true_type = tf.cast(true_type, tf.int32)
@@ -213,9 +225,11 @@ class Model_NP_HV(Model):
             """
             Calculate the horizontal partial differentiation for horizontal channel
             and the vertical partial differentiation for vertical channel.
+
             The partial differentiation is approximated by calculating the central differnce
             which is obtained by using Sobel kernel of size 5x5. The boundary is zero-padded
             when channel is convolved with the Sobel kernel.
+
             Args:
                 l (tensor): tensor of shape NHWC with C should be 2 (1 channel for horizonal 
                             and 1 channel for vertical)
@@ -338,7 +352,7 @@ class Model_NP_HV(Model):
             viz = tf.expand_dims(viz, axis=0)
             tf.summary.image('output', viz, max_outputs=1)
 
-        return
+        return self.cost
 ####
 
 class Model_NP_DIST(Model):

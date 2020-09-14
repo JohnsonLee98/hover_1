@@ -22,7 +22,7 @@ for i,inst in enumerate(inst_list):
     inst_row = scio.loadmat(in_path)
     img_row = imread(im_path)
     img_row = np.dstack((img_row[...,:3],inst_row['inst_map']))
-    img_row = np.dstack((img_row,inst_row['type_map']))
+    img_row = np.dstack((img_row,inst_row['type_map'])).astype(np.uint32)
     print(img_row.shape)
     np.save('../../con/train/%s.npy'%image_list[i].split('.')[0],img_row)
 # image_list = sorted(image_list)

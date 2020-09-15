@@ -34,7 +34,7 @@ def cropping_center(x, crop_shape, batch=False):
         h0 = int((orig_shape[1] - crop_shape[0]) * 0.5)
         w0 = int((orig_shape[2] - crop_shape[1]) * 0.5)
         x = x[:,h0:h0 + crop_shape[0], w0:w0 + crop_shape[1]]        
-    return (int)(x)
+    return x.astype(np.int64)
 
 ####
 def rm_n_mkdir(dir_path):

@@ -16,9 +16,9 @@ from .misc import *
 #     the distance map is normalized to 0-1 range
 
 np_hv = {
-    'train_input_shape' : [270, 270],
+    'train_input_shape' : [256, 256],
     'train_mask_shape'  : [ 80,  80],
-    'infer_input_shape' : [270, 270],
+    'infer_input_shape' : [256, 256],
     'infer_mask_shape'  : [ 80,  80], 
 
     'training_phase'    : [

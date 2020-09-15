@@ -8,7 +8,7 @@ import scipy.io as scio
 from matplotlib.image import  imread
 import numpy as np
 import os
-root_path = '../../CoNSeP/Train/'
+root_path = '../../CoNSeP/Test/'
 
 Image_path = os.path.join(root_path,'Images')
 Inst_path = os.path.join(root_path,'Labels')
@@ -24,5 +24,5 @@ for i,inst in enumerate(inst_list):
     img_row = np.dstack((img_row[...,:3],inst_row['inst_map']))
     img_row = np.dstack((img_row,inst_row['type_map']))
     print(img_row.shape)
-    np.save('../../con/train/%s.npy'%image_list[i].split('.')[0],img_row)
+    np.save('../../con/test/%s.npy'%image_list[i].split('.')[0],img_row)
 # image_list = sorted(image_list)

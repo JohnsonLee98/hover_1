@@ -37,7 +37,7 @@ class GenInstance(ImageAugmentor):
         for inst_id in inst_list:
             inst_map = np.array(ann == inst_id, np.uint8)
             remapped_ids = measurements.label(inst_map)[0]
-            remapped_ids[remapped_ids > 1] += current_max_id
+            remapped_ids[remapped_ids > 1] = remapped_ids[remapped_ids > 1] +current_max_id
             ann[remapped_ids > 1] = remapped_ids[remapped_ids > 1]
             current_max_id = np.amax(ann)
         return ann

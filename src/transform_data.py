@@ -8,7 +8,7 @@ import scipy.io as scio
 from matplotlib.image import  imread
 import numpy as np
 import os
-root_path = '../../CoNSeP/Train/'
+root_path = '../../CoNSeP/Test/'
 
 Image_path = os.path.join(root_path,'Images')
 Inst_path = os.path.join(root_path,'Labels')

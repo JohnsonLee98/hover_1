@@ -20,7 +20,7 @@ for i,inst in enumerate(inst_list):
     in_path = os.path.join(Inst_path,inst)
     im_path = os.path.join(Image_path,image_list[i])
     inst_row = scio.loadmat(in_path)
-    img_row = imread(im_path).astype(np.uint32)
+    img_row = imread(im_path)
     img_row = np.dstack((img_row[...,:3],inst_row['inst_map']))
     img_row = np.dstack((img_row,inst_row['type_map']))
     print(img_row.shape)

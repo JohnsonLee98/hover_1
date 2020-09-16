@@ -86,8 +86,8 @@ def decoder(name, i):
     with tf.variable_scope(name):
         with tf.variable_scope('u3'):
             u3 = upsample2x('rz', i[-1])
-            print(i)
-            print(u3)
+            # print(i)
+            # print(u3)
             u3_sum = tf.add_n([u3, i[-2]])
 
             u3 = Conv2D('conva', u3_sum, 256, 5, strides=1, padding=pad)   
@@ -187,8 +187,9 @@ class Model_NP_HV(Model):
             d = encoder(i, self.freeze)
             d[0] = crop_op(d[0], (184, 184))
             d[1] = crop_op(d[1], (72, 72))
-
+                
             ####
+            print(d)
             np_feat = decoder('np', d)
             npx = BNReLU('preact_out_np', np_feat[-1])
 

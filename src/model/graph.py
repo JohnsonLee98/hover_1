@@ -86,6 +86,8 @@ def decoder(name, i):
     with tf.variable_scope(name):
         with tf.variable_scope('u3'):
             u3 = upsample2x('rz', i[-1])
+            print(i)
+            print(u3)
             u3_sum = tf.add_n([u3, i[-2]])
 
             u3 = Conv2D('conva', u3_sum, 256, 5, strides=1, padding=pad)   
